@@ -1,6 +1,6 @@
 <ul>
 <% @hackathons.each do |hackathon| %>
-  <li><%= hackathon.name %></li>
+  <li><%= link_to hackathon.name, :action => :show, :id => hackathon.id %></li>
   <li><%= hackathon.start_date %></li>
   <li><a class="btn btn-danger" src= <%= link_to "Delete", hackathon_path(hackathon), method: "delete", data:{confirm: "Are you sure you want to delete this hackathon?"} %></a></li>
 <% end %>

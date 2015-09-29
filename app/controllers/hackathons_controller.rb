@@ -12,6 +12,7 @@ class HackathonsController < ApplicationController
   end
 
   def show
+    @hackathon = Hackathon.find_by_id(params[:id])
   end
 
   def index
