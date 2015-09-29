@@ -11,11 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150929172827) do
+ActiveRecord::Schema.define(version: 20150929193909) do
 
   create_table "hackathons", force: :cascade do |t|
     t.string   "name"
-    t.date     "start_date"
+    t.string   "start_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -31,6 +31,14 @@ ActiveRecord::Schema.define(version: 20150929172827) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  create_table "user_hackathons", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "hackathon_id"
+  end
+
+  add_index "user_hackathons", ["hackathon_id"], name: "index_user_hackathons_on_hackathon_id"
+  add_index "user_hackathons", ["user_id"], name: "index_user_hackathons_on_user_id"
 
   create_table "user_skills", force: :cascade do |t|
     t.integer  "user_id"

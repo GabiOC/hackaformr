@@ -1,0 +1,7 @@
+
+<% if current_user.organizer %>
+<h1> Create New Hackathon </h1>
+  <%= render "hackathon_form" %>
+<% else %>
+<h1> Participant </h1>
+<% end %>
