@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
-  devise_for :users
-  resources :users
+  root "welcome#index"
+
+  devise_for :users, controllers: { registrations: "registrations" }
+  resources :users, :hackathons
 end
