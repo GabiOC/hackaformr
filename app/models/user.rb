@@ -10,4 +10,7 @@ class User < ActiveRecord::Base
   has_many :teams, through: :user_teams
   has_many :hackathons, through: :user_hackathons
   has_many :skills, through: :user_skills
+
+  # Addition for MVP
+  has_many :participants
 end
