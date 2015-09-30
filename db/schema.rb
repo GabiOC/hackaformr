@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150929193909) do
+ActiveRecord::Schema.define(version: 20150930145534) do
 
   create_table "hackathons", force: :cascade do |t|
     t.string   "name"
@@ -41,20 +41,16 @@ ActiveRecord::Schema.define(version: 20150929193909) do
   add_index "user_hackathons", ["user_id"], name: "index_user_hackathons_on_user_id"
 
   create_table "user_skills", force: :cascade do |t|
-    t.integer  "user_id"
-    t.integer  "skill_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer "user_id"
+    t.integer "skill_id"
   end
 
   add_index "user_skills", ["skill_id"], name: "index_user_skills_on_skill_id"
   add_index "user_skills", ["user_id"], name: "index_user_skills_on_user_id"
 
   create_table "user_teams", force: :cascade do |t|
-    t.integer  "user_id"
-    t.integer  "team_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer "user_id"
+    t.integer "team_id"
   end
 
   add_index "user_teams", ["team_id"], name: "index_user_teams_on_team_id"
