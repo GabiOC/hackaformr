@@ -1,1 +1,10 @@
-<%= @hackathon.name %>
+<h1><%= @hackathon.name %></h1>
+
+<h2>Add New Participant</h2>
+<%= render 'participant_form' %>
+
+<h2>Current Participants</h2>
+<% @hackathon.participants.each do |participant| %>
+  <li><%= participant.name %>
+  <%= participant.skills %></li>
+<% end %>

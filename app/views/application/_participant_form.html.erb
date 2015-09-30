@@ -1,0 +1,16 @@
+<%= form_tag(participants_create_path, method: "post") do %>
+  <%= hidden_field_tag :hackathon_id, @hackathon.id %>
+  <h3><%= label_tag(:name, "Name") %></h3>
+  <%= text_field_tag(:name) %>
+   <br>
+  <h3><%= label_tag(:email, "Email") %></h3>
+  <%= text_field_tag(:email) %>
+  <br>
+  <h3><%= label_tag(:skills, "Skills") %></h3>
+  <%= label_tag(:skills, "Back End") %> <%= check_box_tag(:skills, "Back End") %>
+  <%= label_tag(:skills, "Front End") %> <%= check_box_tag(:skills, "Front End") %>
+  <%= label_tag(:skills, "Designer") %> <%= check_box_tag(:skills, "Designer") %>
+  <%= label_tag(:skills, "UX/Marketing") %> <%= check_box_tag(:skills, "UX/Marketing") %>
+  <br>
+  <%= submit_tag "Submit", class: "btn btn-primary" %>
+<% end %>
