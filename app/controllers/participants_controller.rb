@@ -6,7 +6,6 @@ class ParticipantsController < ApplicationController
   def create
     @hackathon = Hackathon.find_by_id(params["hackathon_id"])
     @participant = Participant.create(name: params["name"], email: params["email"], skills: params["skills"])
-    binding.pry
     @hackathon.participants << @participant
     redirect_to hackathon_path(@hackathon.id)
   end
