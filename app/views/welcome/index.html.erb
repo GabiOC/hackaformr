@@ -1,5 +1,5 @@
 
-<% if current_user.organizer %>
+<% if current_user.present? && current_user.organizer %>
 <h1> Create New Hackathon </h1>
   <%= render "hackathon_form" %>
 <% else %>

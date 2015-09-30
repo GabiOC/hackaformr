@@ -8,3 +8,8 @@
   <li><%= participant.name %>
   <%= participant.skills %></li>
 <% end %>
+
+<%= form_tag(teams_create_path, method: "post") do %>
+<%= hidden_field_tag :hackathon_id, @hackathon.id %>
+<%= submit_tag "Create Team", class: "btn btn-primary" %>
+ <% end %>
