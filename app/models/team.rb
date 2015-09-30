@@ -14,7 +14,10 @@ class Team < ActiveRecord::Base
     hackathon.participants.each do |p|
       @team_array.each do |t|
         binding.pry
-        if !t.include?(p[:skills]) && !@team_array.any? {|a| a.include?(p)} && t.length < 4
+        participant_not_assigned = !@team_array.any? {|a| a.include?(p)}
+        skill_not_in_team = !t.any? {|x| x.attributes["skills"].include?(p[:skills])}
+        
+        if skill_not_in_team && participant_not_assigned && t.length < 4
           t << p
         end
       end
