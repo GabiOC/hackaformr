@@ -6,4 +6,19 @@ class Team < ActiveRecord::Base
 
   # Addition for MVP model
   has_many :participants
+
+  # Matching algorithm (WIP!)
+  def self.for(hackathon)
+    @team_array = [[], []]
+
+    hackathon.participants.each do |p|
+      @team_array.each do |t|
+        binding.pry
+        if !t.include?(p[:skills]) && !@team_array.any? {|a| a.include?(p)} && t.length < 4
+          t << p
+        end
+      end
+    end
+  end
+
 end
