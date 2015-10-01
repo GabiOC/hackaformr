@@ -5,11 +5,7 @@ class TeamsController < ApplicationController
 
   def create
     @hackathon = Hackathon.find_by_id(params["hackathon_id"])
-  
 
-  end
-
-  def new
   end
 
 end
