@@ -1,7 +1,16 @@
 
+
 <% if current_user.present? && current_user.organizer %>
 <h1> Create New Hackathon </h1>
-  <%= render "hackathon_form" %>
+
+<%= render "hackathon_form" %>
 <% else %>
-<h1> Participant </h1>
+
+<div class="jumbotron center">
+<h1>hackaformr</h1>
+<a href="<%=new_user_session_path%>" class="btn btn-default">Log In</a>
+<a href="<%=new_user_registration_path%>" class="btn btn-primary">Sign Up</a>
+
+</div>
+
 <% end %>

@@ -1,8 +1,8 @@
 <%= form_tag("hackathons", method: "post") do %>
-  <%= label_tag(:name, "Name") %>
+  <%= label_tag(:name, "Hackathon Name") %><br>
   <%= text_field_tag(:name) %>
    <br>
-  <%= label_tag(:start_date, "Start Date") %>
+  <%= label_tag(:start_date, "Start Date") %><br>
   <%= text_field_tag(:start_date) %>
   <br>
   <%= submit_tag "Submit", class: "btn btn-primary" %>
