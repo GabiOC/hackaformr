@@ -1,0 +1,18 @@
+<% @teams.each_with_index do |t, index| %>
+  <div class="col-md-4"><h1>Team <%=index + 1%></h1>
+    <table class="table table-bordered" id="teams">
+      <tr>
+        <th><h3> Name </h3></th>
+        <th><h3> Email </h3></th>
+        <th><h3> Skills </h3></th>
+      </tr>
+    <% t.each do |p|%>
+      <tbody>
+        <td><%=p.name%></td>
+        <td><%=p.email%></td>
+        <td><%=p.skills%></</td>
+      </tbody>
+    <%end%>
+    </table>
+  </div>
+<%end%>

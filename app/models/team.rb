@@ -52,18 +52,18 @@ class Team < ActiveRecord::Base
         end
       end
     end
-    binding.pry
     @team_array
   end
 
   def self.check_team_size
+    # binding.pry
     smallest_team = @team_array.inject { |memo, team| memo.count < team.count ? memo : team }
     largest_team = @team_array.inject { |memo, team| memo.count > team.count ? memo : team }
     team_size_diff = largest_team.count - smallest_team.count
     if team_size_diff > 1
       (team_size_diff - 1).times do |i|
         smallest_team.push largest_team.pop
-        binding.pry
+        # binding.pry
       end
       @team_array
     else
