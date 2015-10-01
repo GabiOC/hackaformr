@@ -1,7 +1,11 @@
-
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Pacifico">
 <% if current_user.present? && current_user.organizer %>
 <h1> Create New Hackathon </h1>
+
   <%= render "hackathon_form" %>
 <% else %>
-<h1> Participant </h1>
+<div id=style><h1>Participant</h1></div>
 <% end %>
+</head>
