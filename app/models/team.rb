@@ -11,8 +11,13 @@ class Team < ActiveRecord::Base
   def self.for(hackathon)
     @hackathon = hackathon
     @team_array = create_team_array
-    @remainder_participants = []
+    assign_teams
+    assign_remainder_participants
+    check_team_size
+  end
 
+  def self.assign_teams
+    @remainder_participants = []
     @hackathon.participants.each do |p|
       @team_array.each do |t|
         participant_not_assigned = !@team_array.any? {|a| a.include?(p)}
@@ -25,8 +30,7 @@ class Team < ActiveRecord::Base
         @remainder_participants << p
       end
     end
-    assign_remainder_participants
-    check_team_size
+    @team_array
   end
 
   def self.create_team_array
@@ -41,6 +45,7 @@ class Team < ActiveRecord::Base
     max_num_teams.times do |i|
       @team_array << Array.new
     end
+    binding.pry
     @team_array
   end
 
@@ -52,18 +57,35 @@ class Team < ActiveRecord::Base
         end
       end
     end
+    binding.pry
     @team_array
+    # check_team_size
   end
 
   def self.check_team_size
-    # binding.pry
     smallest_team = @team_array.inject { |memo, team| memo.count < team.count ? memo : team }
     largest_team = @team_array.inject { |memo, team| memo.count > team.count ? memo : team }
     team_size_diff = largest_team.count - smallest_team.count
+    @skills = ["Back End", "UX/Marketing", "Designer", "Front End"]
+    missing_skills = []
+    @skills.each do |skill|
+      binding.pry
+      if !smallest_team.any? {|a| a[:skills] == skill}
+        missing_skills << skill
+      end
+    end
+
+    @team_array.each do |t|
+      if t.size == largest_team.size
+    end
+
     if team_size_diff > 1
       (team_size_diff - 1).times do |i|
+        # Should only add participants to smallest team that:
+        # a) are from a team that have multiple of that skill
+        # b) contain a skill that's missing from smallest team
         smallest_team.push largest_team.pop
-        # binding.pry
+        binding.pry
       end
       @team_array
     else
