@@ -45,7 +45,6 @@ class Team < ActiveRecord::Base
     max_num_teams.times do |i|
       @team_array << Array.new
     end
-    binding.pry
     @team_array
   end
 
@@ -57,7 +56,6 @@ class Team < ActiveRecord::Base
         end
       end
     end
-    binding.pry
     @team_array
     # check_team_size
   end
@@ -69,7 +67,7 @@ class Team < ActiveRecord::Base
     @skills = ["Back End", "UX/Marketing", "Designer", "Front End"]
     missing_skills = []
     @skills.each do |skill|
-      binding.pry
+      # binding.pry
       if !smallest_team.any? {|a| a[:skills] == skill}
         missing_skills << skill
       end
@@ -86,7 +84,7 @@ class Team < ActiveRecord::Base
         # a) are from a team that have multiple of that skill
         # b) contain a skill that's missing from smallest team
         smallest_team.push largest_team.pop
-        binding.pry
+        # binding.pry
       end
       @team_array
     else
