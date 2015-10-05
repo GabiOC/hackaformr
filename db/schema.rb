@@ -20,14 +20,6 @@ ActiveRecord::Schema.define(version: 20151002154727) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "participant_skills", force: :cascade do |t|
-    t.integer "participant_id"
-    t.integer "skills_id"
-  end
-
-  add_index "participant_skills", ["participant_id"], name: "index_participant_skills_on_participant_id"
-  add_index "participant_skills", ["skills_id"], name: "index_participant_skills_on_skills_id"
-
   create_table "participants", force: :cascade do |t|
     t.string  "name"
     t.string  "email"
