@@ -8,5 +8,3 @@ class UserNotifier < ActionMailer::Base
     :subject => 'Thanks for signing up for our amazing app' )
   end
 end
-
-end
