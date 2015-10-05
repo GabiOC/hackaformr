@@ -75,9 +75,10 @@ class Team < ActiveRecord::Base
       end
     end
 
-    @team_array.each do |t|
-      if t.size == largest_team.size
-    end
+    # @team_array.each do |t|
+    #   if t.size == largest_team.size
+    #   end
+    # end
 
     if team_size_diff > 1
       (team_size_diff - 1).times do |i|
