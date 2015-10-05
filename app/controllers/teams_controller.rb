@@ -9,14 +9,12 @@ class TeamsController < ApplicationController
     @hackathon = Hackathon.find_by_id(params["hackathon_id"])
     @teams = Team.for(@hackathon)
     @teams.each do |t|
-      binding.pry
       Team.create
-      binding.pry
       t.each do |p|
         t = Team.last
         p.team = t
-        binding.pry
       end
     end
+    render "teams/index"
   end
 end
