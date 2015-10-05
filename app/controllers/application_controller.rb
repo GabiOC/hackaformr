@@ -11,9 +11,7 @@ class ApplicationController < ActionController::Base
   end
 
   #  def current_user
-  #   if user_signed_in?
-  #   #  return unless session[:user_id]
-  #    @current_user = User.find(session[:user_id])
-  #   end
+  #    return unless session[:user_id] || session[:participant_id]
+  #    @current_user = User.find(session[:user_id]) || Participant.find(session[:participant_id])
   #  end
 end

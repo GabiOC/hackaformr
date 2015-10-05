@@ -1,6 +1,7 @@
 class ParticipantsController < ApplicationController
 
   def show
+    binding.pry
   end
 
   def create
@@ -11,6 +12,9 @@ class ParticipantsController < ApplicationController
   end
 
   def new
+  end
+
+  def destroy
   end
 
 end

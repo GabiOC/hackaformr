@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151002154727) do
+ActiveRecord::Schema.define(version: 20151005191027) do
 
   create_table "hackathons", force: :cascade do |t|
     t.string   "name"
@@ -21,11 +21,22 @@ ActiveRecord::Schema.define(version: 20151002154727) do
   end
 
   create_table "participants", force: :cascade do |t|
-    t.string  "name"
-    t.string  "email"
-    t.string  "skills"
-    t.integer "hackathon_id"
-    t.integer "team_id"
+    t.string   "name"
+    t.string   "skills"
+    t.integer  "hackathon_id"
+    t.integer  "team_id"
+    t.string   "email",                  default: "", null: false
+    t.string   "encrypted_password",     default: "", null: false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",          default: 0
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "participants", ["hackathon_id"], name: "index_participants_on_hackathon_id"
