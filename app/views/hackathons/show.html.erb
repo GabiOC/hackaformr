@@ -5,7 +5,9 @@
   <h2>Current Participants</h2>
   <% @hackathon.users.each do |user| %>
     Email: <%= user.email %><br>
-    Skills: <%= user.skills %><br>
+    Skills: <% user.skills.each do |skill| %>
+      <%= skill.name %> 
+    <% end %><br>
   <% end %>
 
   <h2>Ready to create teams?</h2>
