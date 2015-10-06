@@ -18,8 +18,8 @@
   <h2>Upcoming Hackathons</h2>
   <% Hackathon.all.each_with_index do |hackathon, index| %>
     <%= "#{index+1}." %>
-    <%= hackathon.name %><br>
-    <%= hackathon.start_date %><br>
+    Name: <%= link_to(hackathon.name, hackathon_path(hackathon)) %>
+    Start Date: <%= hackathon.start_date %><br>
   <% end %>
 <% else %>
   <div class="jumbotron center">
