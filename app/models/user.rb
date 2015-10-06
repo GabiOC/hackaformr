@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  has_many :user_hackathons
+  has_many :user_hackathons, :dependent => :destroy
   has_many :user_teams
   has_many :user_skills
   has_many :hackathons, through: :user_hackathons
