@@ -1,8 +1,7 @@
 class Hackathon < ActiveRecord::Base
-  has_many :user_hackathons
   has_many :teams
-  has_many :users, through: :user_hackathons
+  belongs_to :admin
 
-  # Addition for MVP
-  has_many :participants
+  has_many :user_hackathons
+  has_many :users, through: :user_hackathons
 end

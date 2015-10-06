@@ -10,8 +10,5 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.for(:account_update) { |u| u.permit(:name, :email, :password, :password_confirmation, :organizer) }
   end
 
-  #  def current_user
-  #    return unless session[:user_id] || session[:participant_id]
-  #    @current_user = User.find(session[:user_id]) || Participant.find(session[:participant_id])
-  #  end
+  add_flash_types :success, :warning, :danger, :info
 end
