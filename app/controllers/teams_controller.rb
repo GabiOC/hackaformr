@@ -12,8 +12,8 @@ class TeamsController < ApplicationController
       Team.create
       t.each do |u|
         t = Team.last
-        u.team = t
-        # UserNotifier.send_signup_email(u).deliver
+        u.teams << t
+        UserNotifier.send_signup_email(u).deliver
       end
     end
     render "teams/index"
