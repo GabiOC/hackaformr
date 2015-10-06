@@ -2,10 +2,11 @@ Rails.application.routes.draw do
   root "welcome#index"
 
   devise_for :users, controllers: { registrations: "registrations" }
-  devise_for :participants, controllers: { registrations: "registrations" }
+  devise_for :admin, controllers: { registrations: "registrations" }
   resources :users, :hackathons, :participants, :teams
 
   post '/hackathons/create', to: 'hackathons#create'
-  post '/participants/create', to: 'participants#create'
+  post '/users/add_hackathon', to: 'users#add_hackathon'
+  post '/users/remove_hackathon', to: 'users#remove_hackathon'
   post '/teams/create', to: 'teams#create'
 end

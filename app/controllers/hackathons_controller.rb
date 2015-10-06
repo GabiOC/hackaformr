@@ -5,7 +5,7 @@ class HackathonsController < ApplicationController
 
   def create
     @hackathon = Hackathon.create(name: params["name"], start_date: params["start_date"])
-    current_user.hackathons << @hackathon
+    current_admin.hackathons << @hackathon
     redirect_to hackathons_path
   end
 
@@ -14,7 +14,7 @@ class HackathonsController < ApplicationController
   end
 
   def index
-    @hackathons = current_user.hackathons
+    @hackathons = current_admin.hackathons
   end
 
   def destroy

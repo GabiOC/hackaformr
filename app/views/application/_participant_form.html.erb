@@ -15,3 +15,8 @@
   <%= submit_tag "Submit", class: "btn btn-primary" %>
 
 <% end %>
+
+<%= form_tag(teams_create_path, method: "post") do %>
+<%= hidden_field_tag :hackathon_id, @hackathon.id %>
+<%= submit_tag "Join Hackathon", class: "btn btn-primary"%>
+<% end %>

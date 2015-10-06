@@ -10,10 +10,10 @@ class TeamsController < ApplicationController
     @teams = Team.for(@hackathon)
     @teams.each do |t|
       Team.create
-      t.each do |p|
+      t.each do |u|
         t = Team.last
-        p.team = t
-        ParticipantNotifier.send_signup_email(p).deliver
+        u.team = t
+        # UserNotifier.send_signup_email(u).deliver
       end
     end
     render "teams/index"
