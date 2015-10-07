@@ -1,15 +1,22 @@
 <%= form_tag(hackathons_create_path) do %>
-  <%= label_tag(:name, "Hackathon Name") %><br>
-  <%= text_field_tag(:name) %>
-  <br>
-  <%= label_tag(:start_date, "Start Date") %><br>
-  <%= date_field_tag(:start_date) %>
-  <br>
-  <%= label_tag(:location, "Location") %><br>
-  <%= text_field_tag(:location) %>
-  <br>
-  <%= label_tag(:max_team_size, "Max Team Size") %><br>
-  <%= number_field_tag(:max_team_size) %>
-  <br>
+  <div class="form" id="hackathon-input" >
+    <%= label_tag(:name, "Hackathon Name") %><br>
+    <%= text_field_tag(:name) %>
+    <br>
+    <%= label_tag(:start_date, "Start Date") %><br>
+    <%= date_field_tag(:start_date) %>
+    <br>
+    <%= label_tag(:end_date, "End Date") %><br>
+    <%= date_field_tag(:end_date) %>
+    <br>
+    <%= label_tag(:location, "Location") %><br>
+    <%= text_field_tag(:location) %>
+    <br>
+    <%= label_tag(:max_team_size, "Max Team Size") %><br>
+    <%= number_field_tag(:max_team_size) %>
+    <br>
+    <%= label_tag(:description, "Description") %><br>
+    <%= text_area_tag(:description) %>
+  </div>
   <%= submit_tag "Submit", class: "btn btn-primary" %>
 <% end %>

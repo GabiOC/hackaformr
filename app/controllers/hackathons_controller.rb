@@ -4,7 +4,7 @@ class HackathonsController < ApplicationController
   end
 
   def create
-    @hackathon = Hackathon.create(name: params["name"], start_date: params["start_date"])
+    @hackathon = Hackathon.create(name: params["name"], start_date: params["start_date"], end_date: params["end_date"], description: params["description"], max_team_size: params["max_team_size"], location: params["location"])
     current_admin.hackathons << @hackathon
     redirect_to hackathons_path
   end

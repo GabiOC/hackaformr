@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151007151531) do
+ActiveRecord::Schema.define(version: 20151007165521) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,13 +36,26 @@ ActiveRecord::Schema.define(version: 20151007151531) do
 
   create_table "hackathons", force: :cascade do |t|
     t.string   "name"
-    t.string   "start_date"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.date     "start_date"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
     t.integer  "admin_id"
+    t.integer  "max_team_size"
+    t.date     "end_date"
+    t.text     "description"
+    t.string   "location"
   end
 
   add_index "hackathons", ["admin_id"], name: "index_hackathons_on_admin_id", using: :btree
+  add_index "hackathons", ["admin_id"], name: "index_hackathons_on_admin_id"
+
+  create_table "participant_skills", force: :cascade do |t|
+    t.integer "participant_id"
+    t.integer "skills_id"
+  end
+
+  add_index "participant_skills", ["participant_id"], name: "index_participant_skills_on_participant_id"
+  add_index "participant_skills", ["skills_id"], name: "index_participant_skills_on_skills_id"
 
   create_table "skills", force: :cascade do |t|
     t.string   "name"

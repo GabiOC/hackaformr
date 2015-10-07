@@ -8,6 +8,7 @@ class Team < ActiveRecord::Base
   # Matching algorithm 2.0
   def self.for(hackathon)
     @users = hackathon.users
+    @max_team_members = hackathon.max_team_size
     @skills = Skill.all
     create_team_array
     group_skills
@@ -47,7 +48,6 @@ class Team < ActiveRecord::Base
   def self.create_team_array
     @team_array = []
     # Add custom max team members when added as attribute, hard-coded for now
-    @max_team_members = 4
     if @users.count % @max_team_members == 0
       max_num_teams = @users.count/@max_team_members
     else

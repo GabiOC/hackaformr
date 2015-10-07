@@ -1,6 +1,11 @@
 <h1><%= @hackathon.name %></h1>
-<h4>Start Date: <%= @hackathon.start_date %></h4>
-<h4>Organizer: <%= @hackathon.admin.email %></h4>
+<ul>
+  <li>Start Date: <%= @hackathon.start_date %></li>
+  <li>End Date: <%= @hackathon.end_date %></li>
+  <li>Location: <%= @hackathon.location %></li>
+  <li>Organizer: <%= @hackathon.admin.email %></li>
+  <li>Description: <%= @hackathon.description %></li>
+</ul>
 
 <% if admin_signed_in? %>
   <h2>Current Participants</h2>
