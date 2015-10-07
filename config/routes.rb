@@ -3,7 +3,11 @@ Rails.application.routes.draw do
 
   devise_for :users, controllers: { registrations: "registrations" }
   devise_for :admin, controllers: { registrations: "registrations" }
-  resources :users, :hackathons, :participants, :teams
+  resources :users, :hackathons, :admin, :teams
+
+  resources :hackathons do
+    resources :teams
+  end
 
   post '/hackathons/create', to: 'hackathons#create'
   post '/users/add_hackathon', to: 'users#add_hackathon'

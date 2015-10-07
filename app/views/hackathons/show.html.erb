@@ -1,12 +1,13 @@
 <h1><%= @hackathon.name %></h1>
-<h2>Start Date: <%= @hackathon.start_date %></h2>
+<h4>Start Date: <%= @hackathon.start_date %></h4>
+<h4>Organizer: <%= @hackathon.admin.email %></h4>
 
 <% if admin_signed_in? %>
   <h2>Current Participants</h2>
   <% @hackathon.users.each do |user| %>
     Email: <%= user.email %><br>
     Skills: <% user.skills.each do |skill| %>
-      <%= skill.name %> 
+      <%= skill.name %>
     <% end %><br>
   <% end %>
 
@@ -17,12 +18,18 @@
   <% end %>
 
 <% elsif user_signed_in? %>
+
   <% if @hackathon.users.include? current_user %>
-    <h3>You're currently signed up for this hackathon and you'll be assigned a team soon.<h3>
-    Don't want to participate in this hackathon anymore?
-    <%= form_tag(users_remove_hackathon_path, method: "post") do %>
-      <%= hidden_field_tag :hackathon_id, @hackathon.id %>
-      <%= submit_tag "Remove Myself from Hackathon", class: "btn btn-primary"%>
+    <% if @hackathon.teams == [] %>
+      <h3>You're currently signed up for this hackathon and you'll be assigned a team soon.<h3>
+      Don't want to participate in this hackathon anymore?
+      <%= form_tag(users_remove_hackathon_path, method: "post") do %>
+        <%= hidden_field_tag :hackathon_id, @hackathon.id %>
+        <%= submit_tag "Remove Myself from Hackathon", class: "btn btn-primary"%>
+      <% end %>
+    <% else %>
+      You've been assigned to a team!
+      <%= button_to "See the Teams", hackathon_teams_path(@hackathon.id), class: "btn btn-primary"%>
     <% end %>
   <% else %>
     <h2>Sign Up for Hackathon</h2>
@@ -31,4 +38,5 @@
       <%= submit_tag "Sign Up for Hackathon", class: "btn btn-primary"%>
     <% end %>
   <% end %>
+
 <% end %>

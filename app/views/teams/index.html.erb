@@ -1,4 +1,6 @@
-<% @teams.each_with_index do |t, index| %>
+<% hackathon = Hackathon.find_by_id(session[:hackathon_id]) %>
+<% teams = hackathon.teams %>
+<% teams.each_with_index do |t, index| %>
 
   <div class="col-md-4"><h1>Team <%=index + 1%></h1>
     <table class="table table-bordered" id="teams">
@@ -7,11 +9,11 @@
         <th><h3> Email </h3></th>
         <th><h3> Skills </h3></th>
       </tr>
-    <% t.each do |p|%>
+    <% t.users.each do |u|%>
       <tbody>
-        <td><%=p.name%></td>
-        <td><%=p.email%></td>
-        <td>Skills: <% p.skills.each do |skill| %>
+        <td><%=u.name%></td>
+        <td><%=u.email%></td>
+        <td>Skills: <% u.skills.each do |skill| %>
           <%= skill.name %>
         <% end %></td>
       </tbody>
