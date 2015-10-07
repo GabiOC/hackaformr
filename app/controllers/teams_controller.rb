@@ -9,13 +9,18 @@ class TeamsController < ApplicationController
     @hackathon = Hackathon.find_by_id(params["hackathon_id"])
     @teams = Team.for(@hackathon)
     @teams.each do |t|
-      Team.create
+      team = Team.create
+      # remove previous teams in case teams generated multiple times
+      @hackathon.teams = []
+      # add teams to hackathon
+      @hackathon.teams << team
       t.each do |u|
         t = Team.last
         u.teams << t
         UserNotifier.send_signup_email(u).deliver
       end
     end
-    render "teams/index"
+    session[:hackathon_id] = @hackathon.id
+    redirect_to hackathon_teams_path(@hackathon.id)
   end
 end
