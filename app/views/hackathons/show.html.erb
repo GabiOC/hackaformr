@@ -1,35 +1,52 @@
 <% if current_admin %>
-  <div class="col-md-4">
-    <h1><u>Hackathon</u></h1>
-    <h3><%= @hackathon.name %></h3>
-    <li>Start Date: <%= @hackathon.start_date %></li>
-    <li>End Date: <%= @hackathon.end_date %></li>
-    <li>Location: <%= @hackathon.location %></li>
-    <li>Organizer: <%= @hackathon.admin.email %></li>
-    <li>Description: <%= @hackathon.description %></li>
+  <div class="container-fluid">
+    <div class="col-md-6" id="details">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Hackathon Details</h3>
+      </div>
+      <div class="panel-body">
+        <li>Name: <%= @hackathon.name %></li>
+        <li>Start Date: <%= @hackathon.start_date %></li>
+        <li>End Date: <%= @hackathon.end_date %></li>
+        <li>Location: <%= @hackathon.location %></li>
+        <li>Description: <%= @hackathon.description %></li>
+      </div>
+    </div>
   </div>
 
-  <div class="col-md-4">
-    <h2>Current Participants</h2>
-    <% @hackathon.users.each do |user| %>
-      Email: <%= user.email %><br>
-      Skills: <% user.skills.each do |skill| %>
-        <%= skill.name %>
-      <% end %><br>
+    <div class="col-md-6" id="create-teams">
+    <% if @hackathon.teams == [] %>
+      <h2>Ready to create teams?</h2>
+      <%= form_tag(teams_create_path, method: "post") do %>
+        <%= hidden_field_tag :hackathon_id, @hackathon.id %>
+        <%= submit_tag "Create Team", class: "btn-lg btn-primary"%>
+      <% end %>
+    <% else %>
+      <h2> You've created teams! </h2>
+      <%= button_to "See the Teams", hackathon_teams_path(@hackathon.id), class: "btn-lg btn-primary" %>
     <% end %>
+    </div>
   </div>
 
-  <div class="col-md-4">
-  <% if @hackathon.teams == [] %>
-    <h2>Ready to create teams?</h2>
-    <%= form_tag(teams_create_path, method: "post") do %>
-      <%= hidden_field_tag :hackathon_id, @hackathon.id %>
-      <%= submit_tag "Create Team", class: "btn btn-primary"%>
-    <% end %>
-  <% else %>
-    <h2> You've created teams! </h2>
-    <%= button_to "See the Teams", hackathon_teams_path(@hackathon.id), class: "btn btn-primary" %>
-  <% end %>
+  <div id="participants-table">
+    <h2>Current Participants: <%= @hackathon.users.count %></h2>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th><h3> Name </h3></th>
+          <th><h3> Email </h3></th>
+          <th><h3> Skills </h3></th>
+        </tr>
+      </thead>
+      <% @hackathon.users.each do |user| %>
+        <tr>
+        <td><h4><%= user.name %></h4></td>
+        <td><h4><%= user.email %></h4></td>
+        <td><h4><%= user.skills.map {|skill| skill.name }.join(", ") %></h4></td>
+        </tr>
+      <% end %>
+    </table>
   </div>
 
 <% elsif current_user %>

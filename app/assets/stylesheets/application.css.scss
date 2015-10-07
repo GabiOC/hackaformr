@@ -40,8 +40,7 @@ body {
   background-size: cover;
 }
 
-.navbar {
-  padding-top: 1%;
+nav {
   padding-right: 2%;
   margin-left: -2%;
   margin-right: -2%;
@@ -52,15 +51,34 @@ body {
   position: relative;
   text-align: center;
   background: rgba(255,255,255, 0.0);
-  // background-color: #E0E8EF;
 }
 
-table > tbody > td  {
-  // background-color: #E0E8EF;
+.btn-lg {
+  border: none;
 }
 
-table#teams {
-  border: white;
+td {
+  padding: 10px;
+}
+
+table {
+  border: #f8f8f8;
+  border-radius: 4px;
+  background-color: rgba(255,255,255, 0.5);
+}
+
+.container-fluid {
+  padding-left: 0px;
+}
+
+#details {
+  padding-left: 0px;
+  padding-right: 30px;
+}
+
+#create-teams {
+  line-height: 60px;
+  text-align: center;
 }
 
 .theme-dropdown .dropdown-menu {
