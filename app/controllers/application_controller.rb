@@ -12,5 +12,9 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.for(:account_update) { |u| u.permit(:email, :password, :password_confirmation, :name, :skill_ids=>[]) }
   end
 
+  def after_sign_in_path_for(resource)
+    hackathons_path
+  end
+
   add_flash_types :success, :warning, :danger, :info
 end

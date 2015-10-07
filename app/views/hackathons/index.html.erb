@@ -16,7 +16,7 @@
    <tr>
      <td><h4><%= link_to hackathon.name, :action => :show, :id => hackathon.id %></h4></td>
      <td><h4><%= hackathon.start_date %></h4></td>
-     <td><h4><%= hackathon.teams == [] ? "No" : "Yes" %>
+     <td><h4><%= hackathon.teams == [] ? "No" : (link_to "Yes", hackathon_teams_path(hackathon.id) ) %>
      <td><a class="btn btn-default" src= <%= link_to "Edit", edit_hackathon_path(hackathon) %></a>
      <a class="btn btn-danger" src= <%= link_to "Delete", hackathon_path(hackathon), method: "delete", data:{confirm: "Are you sure you want to delete this hackathon?"} %></a></td>
   </tr>
