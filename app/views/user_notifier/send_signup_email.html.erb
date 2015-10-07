@@ -6,7 +6,9 @@
   <body>
     <h1>Hi <%= @user.name %>,</h1>
     <p>You have been assigned to a team for <%= @user.hackathons.last.name%>!</p></br>
-    <p>Click <a href="http://localhost:3000/hackathons/"#{@user.teams.last.hackathon.id}"/teams">here</a> to see hackathon details and chat with your other team members! </p>
+    <p>Click <a href="http://localhost:3000/hackathons/<%=@user.teams.last.hackathon.id%>/teams">here</a> to see hackathon details and chat with your other team members! </p></br>
 
+    <p> Hack away! </p></br>
+    <p> Team hackaformr </p>
   </body>
 </html>
