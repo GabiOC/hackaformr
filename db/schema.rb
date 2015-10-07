@@ -49,14 +49,6 @@ ActiveRecord::Schema.define(version: 20151007165521) do
   add_index "hackathons", ["admin_id"], name: "index_hackathons_on_admin_id", using: :btree
   add_index "hackathons", ["admin_id"], name: "index_hackathons_on_admin_id"
 
-  create_table "participant_skills", force: :cascade do |t|
-    t.integer "participant_id"
-    t.integer "skills_id"
-  end
-
-  add_index "participant_skills", ["participant_id"], name: "index_participant_skills_on_participant_id"
-  add_index "participant_skills", ["skills_id"], name: "index_participant_skills_on_skills_id"
-
   create_table "skills", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
