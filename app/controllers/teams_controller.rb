@@ -13,10 +13,6 @@ class TeamsController < ApplicationController
       # remove previous teams in case teams generated multiple times
       @hackathon.teams = []
       # add teams to hackathon
-      @hackathon.teams << team
-      t.each do |u|
-        @t = Team.last
-        u.teams << @t
       @hackathon.teams << team_object
       user_array.each do |u|
         u.teams << team_object

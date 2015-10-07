@@ -1,6 +1,7 @@
 <div class="jumbotron center">
   <h1>hackaformr</h1>
   <h2>Are you a Hackathon...</h2>
+  <%= link_to "Logout", destroy_admin_session_path, method: :delete, :class => 'navbar-link'  %>
   <a href="<%=new_admin_registration_path%>" class="btn btn-primary btn-lg">Organizer</a>
   <a href="<%=new_user_registration_path%>" class="btn btn-primary btn-lg">Participant</a>
 </div>
