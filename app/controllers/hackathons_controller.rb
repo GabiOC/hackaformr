@@ -14,13 +14,21 @@ class HackathonsController < ApplicationController
   end
 
   def index
-    @hackathons = current_admin.hackathons
+    if current_admin
+      @hackathons = current_admin.hackathons
+    else
+      @hackathons = current_user.hackathons
+    end
   end
 
   def destroy
     deleted_hackathon = Hackathon.find_by_id(params[:id]).destroy
     flash[:success] = "#{deleted_hackathon.name} has been deleted."
     redirect_to hackathons_path
+  end
+
+  def edit
+    @hackathon = Hackathon.find_by_id(params[:id])
   end
 
 end
