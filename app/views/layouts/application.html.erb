@@ -9,10 +9,11 @@
 </head>
 <body>
 
-<%= render "header" %>
+<% unless current_page?(root_path) || current_page?(new_admin_session_path) || current_page?(new_admin_registration_path) || current_page?(new_user_session_path) || current_page?(new_user_registration_path) %>
+  <%= render :partial => "header" %>
+<% end %>
 <%= render 'flash_messages' %>
 <%= yield %>
-
 
 </body>
 </html>

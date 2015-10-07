@@ -1,13 +1,14 @@
-<h1>hackathons</h1>
+<% if current_admin %>
 
-<%= link_to "Create a New Hackathon", :action => :new %>
+<h1>hackathons</h1>
 
 <table class="table table-striped table-bordered">
  <thead>
    <tr>
      <th><h3> Name </h3></th>
      <th><h3> Date </h3></th>
-     <th><h3> Delete </h3></th>
+     <th><h3> Teams? <h3></th>
+     <th><h3> Action </h3></th>
    </tr>
  </thead>
 <% @hackathons.each do |hackathon| %>
@@ -15,8 +16,30 @@
    <tr>
      <td><h4><%= link_to hackathon.name, :action => :show, :id => hackathon.id %></h4></td>
      <td><h4><%= hackathon.start_date %></h4></td>
-     <td><a class="btn btn-danger" src= <%= link_to "Delete", hackathon_path(hackathon), method: "delete", data:{confirm: "Are you sure you want to delete this hackathon?"} %></a></td>
+     <td><h4><%= hackathon.teams == [] ? "No" : "Yes" %>
+     <td><a class="btn btn-default" src= <%= link_to "Edit", edit_hackathon_path(hackathon) %></a>
+     <a class="btn btn-danger" src= <%= link_to "Delete", hackathon_path(hackathon), method: "delete", data:{confirm: "Are you sure you want to delete this hackathon?"} %></a></td>
   </tr>
 </tbody>
  <% end  %>
 </table>
+<h4 class="text-right"><%= link_to "Create a New Hackathon", :action => :new %></h4>
+
+<% elsif current_user %>
+  <h2>Hackathons You'ved Signed Up For</h2>
+  <% current_user.hackathons.each do |hackathon| %>
+    <ul>
+      <li>Name: <%= link_to(hackathon.name, hackathon_path(hackathon)) %></li>
+      <li>Start Date: <%= hackathon.start_date %></li>
+    </ul>
+  <% end %>
+
+  <h2>Upcoming Hackathons</h2>
+  <% Hackathon.all.order(start_date: :asc).each_with_index do |hackathon, index| %>
+    <% if hackathon.start_date > Date.current %>
+      <%= "#{index+1}." %>
+      Name: <%= link_to(hackathon.name, hackathon_path(hackathon)) %>
+      Start Date: <%= hackathon.start_date %><br>
+    <% end %>
+  <% end %>
+<% end %>

@@ -1,33 +1,6 @@
-<% if admin_signed_in? %>
-  <h2>Your Hackathons</h2>
-  <% current_admin.hackathons.each do |hackathon| %>
-    Name: <%= link_to(hackathon.name, hackathon_path(hackathon)) %>
-    Start Date: <%= hackathon.start_date %>
-  <% end %>
-
-  <h2> Create New Hackathon </h2>
-  <%= render "hackathon_form" %>
-
-<% elsif user_signed_in? %>
-  <h2>Hackathons You've Signed Up For</h2>
-  <% current_user.hackathons.each do |hackathon| %>
-    Name: <%= link_to(hackathon.name, hackathon_path(hackathon)) %>
-    Start Date: <%= hackathon.start_date %><br>
-  <% end %>
-
-  <h2>Upcoming Hackathons</h2>
-  <% Hackathon.all.order(start_date: :asc).each_with_index do |hackathon, index| %>
-    <% if hackathon.start_date != nil && hackathon.start_date > Date.current %>
-      <%= "#{index+1}." %>
-      Name: <%= link_to(hackathon.name, hackathon_path(hackathon)) %>
-      Start Date: <%= hackathon.start_date %><br>
-    <% end %>
-  <% end %>
-<% else %>
-  <div class="jumbotron center">
-    <h1>hackaformr</h1>
-    <h2>Are you a Hackathon...</h2>
-    <a href="<%=new_admin_registration_path%>" class="btn btn-primary btn-lg">Organizer</a>
-    <a href="<%=new_user_registration_path%>" class="btn btn-primary btn-lg">Participant</a>
-  </div>
-<% end %>
+<div class="jumbotron center">
+  <h1>hackaformr</h1>
+  <h2>Are you a Hackathon...</h2>
+  <a href="<%=new_admin_registration_path%>" class="btn btn-primary btn-lg">Organizer</a>
+  <a href="<%=new_user_registration_path%>" class="btn btn-primary btn-lg">Participant</a>
+</div>
