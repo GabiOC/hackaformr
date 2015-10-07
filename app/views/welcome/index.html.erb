@@ -9,7 +9,7 @@
   <%= render "hackathon_form" %>
 
 <% elsif user_signed_in? %>
-  <h2>Hackathons You'ved Signed Up For</h2>
+  <h2>Hackathons You've Signed Up For</h2>
   <% current_user.hackathons.each do |hackathon| %>
     Name: <%= link_to(hackathon.name, hackathon_path(hackathon)) %>
     Start Date: <%= hackathon.start_date %><br>
@@ -17,7 +17,7 @@
 
   <h2>Upcoming Hackathons</h2>
   <% Hackathon.all.order(start_date: :asc).each_with_index do |hackathon, index| %>
-    <% if hackathon.start_date > Date.current %>
+    <% if hackathon.start_date != nil && hackathon.start_date > Date.current %>
       <%= "#{index+1}." %>
       Name: <%= link_to(hackathon.name, hackathon_path(hackathon)) %>
       Start Date: <%= hackathon.start_date %><br>

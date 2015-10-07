@@ -32,7 +32,12 @@ body {
   padding-left: 2%;
   padding-right: 2%;
   font-family: "Gudea", serif;
-  background-color: #E0E8EF;
+  // opacity: 0.6;
+  background: url(http://protiumdesign.com/wp-content/uploads/2014/07/Network-Connection-1024.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
 
 .navbar {
@@ -40,17 +45,18 @@ body {
   padding-right: 2%;
   margin-left: -2%;
   margin-right: -2%;
-  background-color: white;
+  background: rgba(255,255,255, 0.5);
 }
 
 .jumbotron {
   position: relative;
   text-align: center;
-  background-color: #E0E8EF;
+  background: rgba(255,255,255, 0.0);
+  // background-color: #E0E8EF;
 }
 
 table > tbody > td  {
-  background-color: #E0E8EF;
+  // background-color: #E0E8EF;
 }
 
 table#teams {
