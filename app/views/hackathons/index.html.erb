@@ -1,30 +1,37 @@
+<!-- View for hackathon admin -->
 <% if current_admin %>
+  <div id="hackathon-table">
+    <h1>hackathons</h1>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th><h3>Name</h3></th>
+          <th><h3>Start Date</h3></th>
+          <th><h3>End Date</h3></th>
+          <th><h3>Teams Created?</h3></th>
+          <th><h3>Action</h3></th>
+        </tr>
+      </thead>
+      <% @hackathons.each do |hackathon| %>
+      <tr>
+        <td><h4><%= link_to hackathon.name, :action => :show, :id => hackathon.id %></h4></td>
+        <td><h4><%= hackathon.start_date %></h4></td>
+        <td><h4><%= hackathon.end_date %></h4></td>
+        <td><h4><%= hackathon.teams == [] ? "No" : (link_to "Yes", hackathon_teams_path(hackathon.id) ) %>
+        <td><a class="btn btn-default" src= <%= link_to "Edit", edit_hackathon_path(hackathon) %></a>
+        <a class="btn btn-danger" src= <%= link_to "Delete", hackathon_path(hackathon), method: "delete", data:{confirm: "Are you sure you want to delete this hackathon?"} %></a></td>
+     </tr>
+      <% end %>
+    </table>
+  </div>
 
-<h1>hackathons</h1>
+  <div class="text-right">
+    <%= link_to new_hackathon_path, class: "btn btn-primary lg" do %>
+    <span class="glyphicon glyphicon-plus" aria-hidden="true"> Create a New Hackathon</span>
+    <% end %>
+  </div>
 
-<table class="table table-striped table-bordered">
- <thead>
-   <tr>
-     <th><h3> Name </h3></th>
-     <th><h3> Date </h3></th>
-     <th><h3> Teams? <h3></th>
-     <th><h3> Action </h3></th>
-   </tr>
- </thead>
-<% @hackathons.each do |hackathon| %>
- <tbody>
-   <tr>
-     <td><h4><%= link_to hackathon.name, :action => :show, :id => hackathon.id %></h4></td>
-     <td><h4><%= hackathon.start_date %></h4></td>
-     <td><h4><%= hackathon.teams == [] ? "No" : (link_to "Yes", hackathon_teams_path(hackathon.id) ) %>
-     <td><a class="btn btn-default" src= <%= link_to "Edit", edit_hackathon_path(hackathon) %></a>
-     <a class="btn btn-danger" src= <%= link_to "Delete", hackathon_path(hackathon), method: "delete", data:{confirm: "Are you sure you want to delete this hackathon?"} %></a></td>
-  </tr>
-</tbody>
- <% end  %>
-</table>
-<h4 class="text-right"><%= link_to "Create a New Hackathon", :action => :new %></h4>
-
+<!-- View for hackathon participant -->
 <% elsif current_user %>
   <h2>Hackathons You'ved Signed Up For</h2>
   <% current_user.hackathons.each do |hackathon| %>
