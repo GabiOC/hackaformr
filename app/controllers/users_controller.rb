@@ -17,7 +17,6 @@ class UsersController < ApplicationController
   def add_hackathon
     @hackathon = Hackathon.find_by_id(params["hackathon_id"])
     @hackathon.users << current_user
-    binding.pry
     flash[:success] = "You've successfully signed up for this hackathon."
     redirect_to hackathon_path(@hackathon.id)
   end

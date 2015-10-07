@@ -11,7 +11,9 @@
       <tbody>
         <td><%=p.name%></td>
         <td><%=p.email%></td>
-        <td><%=p.skills%></</td>
+        <td>Skills: <% p.skills.each do |skill| %>
+          <%= skill.name %>
+        <% end %></td>
       </tbody>
     <%end%>
     </table>
