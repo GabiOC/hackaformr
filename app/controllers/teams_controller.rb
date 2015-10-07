@@ -1,5 +1,5 @@
 class TeamsController < ApplicationController
-
+ skip_before_filter :verify_authenticity_token  
   def show
     @hackathon = Hackathon.find_by_id(params["hackathon_id"])
     @teams = Team.for(@hackathon)
@@ -15,8 +15,8 @@ class TeamsController < ApplicationController
       # add teams to hackathon
       @hackathon.teams << team
       t.each do |u|
-        t = Team.last
-        u.teams << t
+        @t = Team.last
+        u.teams << @t
         UserNotifier.send_signup_email(u).deliver
       end
     end

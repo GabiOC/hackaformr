@@ -4,8 +4,11 @@
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
   </head>
   <body>
-    <h1>Thanks for signing up, <%= @user.name %>!</h1>
-    <p>Thanks for joining and have a great day! Now sign in and do
-awesome things!</p>
+    <h1>Hi <%= @user.name %>,</h1>
+    <p>You have been assigned to a team for <%= @user.hackathons.last.name%>!</p></br>
+    <p>Click <a href="http://localhost:3000/hackathons/<%=@user.teams.last.hackathon.id%>/teams">here</a> to see hackathon details and chat with your other team members! </p></br>
+
+    <p> Hack away! </p></br>
+    <p> Team hackaformr </p>
   </body>
 </html>
