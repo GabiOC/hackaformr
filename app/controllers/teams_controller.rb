@@ -1,8 +1,6 @@
 class TeamsController < ApplicationController
  skip_before_filter :verify_authenticity_token
   def show
-    @hackathon = Hackathon.find_by_id(params["hackathon_id"])
-    @teams = Team.for(@hackathon)
   end
 
   def create

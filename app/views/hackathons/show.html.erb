@@ -1,25 +1,25 @@
 <% if current_admin %>
   <div class="container-fluid">
     <div class="col-md-6" id="details">
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h3 class="panel-title">Hackathon Details</h3>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">Hackathon Details</h3>
+        </div>
+        <div class="panel-body">
+         <div class="row">
+             <div class="col-md-6"><b>Name:</b> <%= @hackathon.name %></div>
+             <div class="col-md-6"><b>Max Team Size:</b> <%= @hackathon.max_team_size %></div>
+         </div>
+         <div class="row">
+           <div class="col-md-6"><b>Start Date:</b> <%= @hackathon.start_date %></div>
+           <div class="col-md-6"><b>Location:</b> <%= @hackathon.location %></div>
+         </div>
+         <div class="row">
+           <div class="col-md-6"><b>End Date:</b> <%= @hackathon.end_date %></div>
+           <div class="col-md-6"><b>Description:</b> <%= @hackathon.description %></div>
+         </div>
+       </div>
       </div>
-      <div class="panel-body">
-       <div class="row">
-           <div class="col-md-6"><b>Name:</b> <%= @hackathon.name %></div>
-           <div class="col-md-6"><b>Max Team Size:</b> <%= @hackathon.max_team_size %></div>
-       </div>
-       <div class="row">
-         <div class="col-md-6"><b>Start Date:</b> <%= @hackathon.start_date %></div>
-         <div class="col-md-6"><b>Location:</b> <%= @hackathon.location %></div>
-       </div>
-       <div class="row">
-         <div class="col-md-6"><b>End Date:</b> <%= @hackathon.end_date %></div>
-         <div class="col-md-6"><b>Description:</b> <%= @hackathon.description %></div>
-       </div>
-     </div>
-    </div>
     </div>
 
     <div class="col-md-6" id="create-teams">
