@@ -68,3 +68,4 @@ gem 'devise'
 gem 'sendgrid'
 gem "figaro"
 gem 'gmaps4rails'
+gem 'geocoder'

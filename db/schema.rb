@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151007165521) do
+ActiveRecord::Schema.define(version: 20151008193728) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -41,6 +41,8 @@ ActiveRecord::Schema.define(version: 20151007165521) do
     t.date     "end_date"
     t.text     "description"
     t.string   "location"
+    t.float    "latitude"
+    t.float    "longitude"
   end
 
   add_index "hackathons", ["admin_id"], name: "index_hackathons_on_admin_id"
