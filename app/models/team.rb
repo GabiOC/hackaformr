@@ -15,6 +15,20 @@ class Team < ActiveRecord::Base
     assign_teams
   end
 
+  def self.create_team_array
+    @team_array = []
+    # Add custom max team members when added as attribute, hard-coded for now
+    if @users.count % @max_team_members == 0
+      max_num_teams = @users.count/@max_team_members
+    else
+      max_num_teams = @users.count/@max_team_members + 1
+    end
+    max_num_teams.times do |i|
+      @team_array << Array.new
+    end
+    @team_array
+  end
+
   def self.group_skills
     @skills_hash = {}
 
@@ -42,20 +56,6 @@ class Team < ActiveRecord::Base
       end
     end
 
-    @team_array
-  end
-
-  def self.create_team_array
-    @team_array = []
-    # Add custom max team members when added as attribute, hard-coded for now
-    if @users.count % @max_team_members == 0
-      max_num_teams = @users.count/@max_team_members
-    else
-      max_num_teams = @users.count/@max_team_members + 1
-    end
-    max_num_teams.times do |i|
-      @team_array << Array.new
-    end
     @team_array
   end
 
