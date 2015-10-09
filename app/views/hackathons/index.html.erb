@@ -66,14 +66,13 @@
   <div class="col-md-4" id="upcoming">
     <div class="panel panel-default">
       <div class="panel-heading">
-        <h3 class="panel-title">All Upcoming Hackathons</h3>
+        <h3 class="panel-title">Sign Up for a Hackathon</h3>
       </div>
       <div class="panel-body">
-        <% Hackathon.all.order(start_date: :asc).each_with_index do |hackathon, index| %>
-        <% binding.pry %>
+        <% Hackathon.all.order(start_date: :asc).each do |hackathon| %>
           <% if hackathon.start_date > Date.current && hackathon.teams == [] %>
             <div class="row">
-              <div class="col-md-6"><%= "#{index+1}." %> <%= link_to(hackathon.name, hackathon_path(hackathon)) %></div>
+              <div class="col-md-6"><%= link_to(hackathon.name, hackathon_path(hackathon)) %></div>
               <div class="col-md-6">Start Date: <%= hackathon.start_date %></div>
             </div>
           <% end %>

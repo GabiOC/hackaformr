@@ -1,31 +1,32 @@
 <% hackathon = Hackathon.find_by_id(session[:hackathon_id]) %>
 <% teams = hackathon.teams %>
+<% user_emails = teams.map do |team| %>
+  <% team.users.map {|user| user.email} %>
+<% end %>
+
+<% unless current_admin %>
+  <div class="text-right">
+    <a href="mailto:<%= user_emails.join(",") %>"class="btn btn-default">Email Your Group</a>
+  </div>
+<% end %>
+
 <% teams.each_with_index do |t, index| %>
-
-<div class="col-md-6">
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <h3 class="panel-title">Team <%=index + 1%></h3>
-    </div>
-    <div class="panel-body">
-      <% t.users.each do |u|%>
-        <div class="row">
-          <div class="col-md-4">Name: <%= u.name %></div>
-          <div class="col-md-4">Email: <%= u.email %></div>
-          <div class="col-md-4">Skills: <% u.skills.each do |skill| %>
-            <%= skill.name %>
-          <% end %></div>
-        </div>
-      <% end %>
-    <% end %>
-    </table>
-    <div class= "email">
-    <a href=
-    "mailto:<%= teams.users.map {|user| user.email}.join(",")%>" class="btn btn-default">
-    Email Your Group</a>
-  </div>
-    </div>
+  <div class="col-md-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Team <%=index + 1%></h3>
+      </div>
+      <div class="panel-body">
+        <% t.users.each do |u|%>
+          <div class="row">
+            <div class="col-md-4">Name: <%= u.name %></div>
+            <div class="col-md-4">Email: <%= u.email %></div>
+            <div class="col-md-4">Skills: <% u.skills.each do |skill| %>
+              <%= skill.name %>
+            <% end %></div>
+          </div>
+        <% end %>
+      </div>
     </div>
   </div>
-
 <% end %>

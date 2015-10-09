@@ -36,7 +36,7 @@
       <% end %>
     <% else %>
       <h2> You've created teams! </h2>
-      <%= button_to "See the Teams", hackathon_teams_path(@hackathon.id), class: "btn-lg btn-primary" %>
+      <%= button_to "See the Teams", hackathon_teams_path(@hackathon.id), method: "get", class: "btn-lg btn-primary" %>
     <% end %>
     </div>
   </div>
@@ -59,11 +59,7 @@
         </tr>
       <% end %>
     </table>
-    <div class= "email">
-    <a href=
-    "mailto:<%= @hackathon.users.map {|user| user.email}.join(",")%>" class="btn btn-default">
-    Email The Participants</a>
-  </div>
+    <a href= "mailto:<%= @hackathon.users.map {|user| user.email}.join(",")%>" class="btn btn-default">Email The Participants</a>
   </div>
 
 
@@ -95,37 +91,35 @@
       </div>
     </div>
 
-    <div class="col-md-6" id="teams">
-      <% if @hackathon.users.include? current_user %>
-        <% if @hackathon.teams == [] %>
-          <h3>You're currently signed up for this hackathon and will be assigned a team soon.<h3>
-          <h4>Don't want to participate in this hackathon anymore?</h4>
-          <%= form_tag(users_remove_hackathon_path, method: "post") do %>
-            <%= hidden_field_tag :hackathon_id, @hackathon.id %>
-            <%= submit_tag "Remove Myself from Hackathon", class: "btn btn-danger"%>
-          <% end %>
-        <% else %>
-          <% session[:hackathon_id] = @hackathon.id %>
-          <h3>You've been assigned to a team!</h3>
-          <%= button_to "See the Teams", hackathon_teams_path(session[:hackathon_id]), class: "btn btn-primary"%>
+  <div class="col-md-6" id="teams">
+    <% if @hackathon.users.include? current_user %>
+      <% if @hackathon.teams == [] %>
+        <h3>You're currently signed up for this hackathon and will be assigned a team soon.<h3>
+        <h4>Don't want to participate in this hackathon anymore?</h4>
+        <%= form_tag(users_remove_hackathon_path, method: "post") do %>
+          <%= hidden_field_tag :hackathon_id, @hackathon.id %>
+          <%= submit_tag "Remove Myself from Hackathon", class: "btn btn-danger"%>  <a href="mailto:<%= @hackathon.admin.email %>" class="btn btn-default">Email The Organizer</a>
         <% end %>
       <% else %>
-        <h3>You're not currently signed up for this hackathon. Want to participate?</h3>
-        <%= form_tag(users_add_hackathon_path, method: "post") do %>
-          <%= hidden_field_tag :hackathon_id, @hackathon.id %>
-          <%= submit_tag "Sign Up for Hackathon", class: "btn btn-primary"%>
-        <% end %>
+        <% session[:hackathon_id] = @hackathon.id %>
+        <h3>You've been assigned to a team!</h3>
+        <%= button_to "See the Teams", hackathon_teams_path(session[:hackathon_id]), class: "btn btn-primary"%> <a href="mailto:<%= @hackathon.admin.email %>" class="btn btn-default">Email The Organizer</a>
       <% end %>
-    <div class= "email">
-      <a href="mailto:<%= @hackathon.admin.email %>" class="btn btn-default">Email The Organizer</a>
-    </div>
+    <% else %>
+      <h3>You're not currently signed up for this hackathon. Want to participate?</h3>
+      <%= form_tag(users_add_hackathon_path, method: "post") do %>
+        <%= hidden_field_tag :hackathon_id, @hackathon.id %>
+        <%= submit_tag "Sign Up for Hackathon", class: "btn btn-primary"%>  <a href="mailto:<%= @hackathon.admin.email %>" class="btn btn-default">Email The Organizer</a>
+      <% end %>
+    <% end %>
   </div>
+  <br>
 
-  <h2>Hackathon Location</h2>
-    <div style='width: 800px;'>
-      <div id="map" style='width: 800px; height: 400px;'></div>
-    </div>
-    <script type="text/javascript">
+  <div id="map-div">
+  <div style='width: 800px;'>
+    <div id="map" style='width: 800px; height: 400px;'></div>
+  </div>
+  <script type="text/javascript">
     handler = Gmaps.build('Google');
     handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
       markers = handler.addMarkers(<%=raw @hash.to_json %>);
@@ -134,5 +128,6 @@
       handler.fitMapToBounds();
     });
   </script>
+  </div
 
 <% end %>
