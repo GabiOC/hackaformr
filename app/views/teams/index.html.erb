@@ -10,14 +10,24 @@
         <th><h3> Skills </h3></th>
       </tr>
     <% t.users.each do |u|%>
-      <tbody>
+      <% if t.users.include? current_user %>
+        <tbody>
         <td><%=u.name%></td>
         <td><%=u.email%></td>
         <td>Skills: <% u.skills.each do |skill| %>
           <%= skill.name %>
         <% end %></td>
-      </tbody>
-    <%end%>
+        </tbody>
+      <% else %>
+        <tbody>
+        <td><%=u.name%></td>
+        <td><%=u.email%></td>
+        <td>Skills: <% u.skills.each do |skill| %>
+          <%= skill.name %>
+        <% end %></td>
+        </tbody>
+      <% end %>
+    <% end %>
     </table>
   </div>
-<%end%>
+<% end %>
