@@ -2,32 +2,22 @@
 <% teams = hackathon.teams %>
 <% teams.each_with_index do |t, index| %>
 
-  <div class="col-md-4"><h1>Team <%=index + 1%></h1>
-    <table class="table table-bordered" id="teams">
-      <tr>
-        <th><h3> Name </h3></th>
-        <th><h3> Email </h3></th>
-        <th><h3> Skills </h3></th>
-      </tr>
-    <% t.users.each do |u|%>
-      <% if t.users.include? current_user %>
-        <tbody>
-        <td><%=u.name%></td>
-        <td><%=u.email%></td>
-        <td>Skills: <% u.skills.each do |skill| %>
-          <%= skill.name %>
-        <% end %></td>
-        </tbody>
-      <% else %>
-        <tbody>
-        <td><%=u.name%></td>
-        <td><%=u.email%></td>
-        <td>Skills: <% u.skills.each do |skill| %>
-          <%= skill.name %>
-        <% end %></td>
-        </tbody>
+<div class="col-md-6">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">Team <%=index + 1%></h3>
+    </div>
+    <div class="panel-body">
+      <% t.users.each do |u|%>
+        <div class="row">
+          <div class="col-md-4">Name: <%= u.name %></div>
+          <div class="col-md-4">Email: <%= u.email %></div>
+          <div class="col-md-4">Skills: <% u.skills.each do |skill| %>
+            <%= skill.name %>
+          <% end %></div>
+        </div>
       <% end %>
-    <% end %>
-    </table>
+    </div>
   </div>
+</div>
 <% end %>

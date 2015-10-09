@@ -16,7 +16,6 @@ class HackathonsController < ApplicationController
     @hash = Gmaps4rails.build_markers(@hackathon) do |hackathon, marker|
       marker.lat hackathon.latitude
       marker.lng hackathon.longitude
-      binding.pry
     end
 end
 
