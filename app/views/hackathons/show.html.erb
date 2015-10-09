@@ -59,11 +59,9 @@
         </tr>
       <% end %>
     </table>
-    <a href="mailto:
-    <% @hackathon.users.each do |u|%>
-      <%=u.email%>,
-      <% end %>
-      ">Email The Participants</a>
+    <a href=
+    "mailto:<%= @hackathon.users.map {|user| user.email}.join(",")%>">
+    Email The Participants</a>
   </div>
 
 <% elsif current_user %>

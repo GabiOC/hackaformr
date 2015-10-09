@@ -69,6 +69,7 @@
       </div>
       <div class="panel-body">
         <% Hackathon.all.order(start_date: :asc).each_with_index do |hackathon, index| %>
+        <% binding.pry %>
           <% if hackathon.start_date > Date.current && hackathon.teams == [] %>
             <div class="row">
               <div class="col-md-6"><%= "#{index+1}." %> <%= link_to(hackathon.name, hackathon_path(hackathon)) %></div>
