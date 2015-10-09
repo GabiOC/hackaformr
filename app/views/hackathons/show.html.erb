@@ -26,7 +26,7 @@
       </div>
     </div>
 
-    <div class="col-md-6" id="create-teams">
+    <div class="col-md-6" id="teams">
     <% if @hackathon.teams == [] %>
       <h2>Ready to create teams?</h2>
       Participants will be emailed when teams are created.
@@ -63,51 +63,68 @@
 
 <% elsif current_user %>
 
-  <div class="col-md-4">
-    <h1><u>Hackathon</u></h1>
-    <h3><%= @hackathon.name %></h3>
-    <ul>
-      <li>Start Date: <%= @hackathon.start_date %></li>
-      <li>End Date: <%= @hackathon.end_date %></li>
-      <li>Location: <%= @hackathon.location %></li>
-      <li>Organizer: <%= @hackathon.admin.email %></li>
-      <li>Description: <%= @hackathon.description %></li>
-    </ul>
-  </div>
+  <div class="container-fluid">
+    <div class="col-md-6" id="details">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">Hackathon Details</h3>
+        </div>
+        <div class="panel-body">
+         <div class="row">
+             <div class="col-md-6"><b>Name:</b> <%= @hackathon.name %></div>
+             <div class="col-md-6"><b>Current Participants:</b> <%= @hackathon.users.count %></div>
+         </div>
+         <div class="row">
+           <div class="col-md-6"><b>Start Date:</b> <%= @hackathon.start_date %></div>
+           <div class="col-md-6"><b>Organizer:</b> <%= @hackathon.admin.name ? @hackathon.admin.name : @hackathon.admin.email %></div>
+         </div>
+         <div class="row">
+           <div class="col-md-6"><b>End Date:</b> <%= @hackathon.end_date %></div>
+           <div class="col-md-6"><b>Description:</b> <%= @hackathon.description %></div>
+         </div>
+         <div class="row">
+           <div class="col-md-12"><b>Location:</b> <%= @hackathon.location %></div>
+         </div>
+       </div>
+      </div>
+    </div>
 
-  <div style='width: 800px;'>
-    <div id="map" style='width: 800px; height: 400px;'></div>
-  </div>
-  <script type="text/javascript">
-  handler = Gmaps.build('Google');
-  handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
-    markers = handler.addMarkers(<%=raw @hash.to_json %>);
-    debugger;
-    handler.bounds.extendWith(markers);
-    handler.fitMapToBounds();
-  });
-  </script>
-
-<div class="col-md-4">
-  <% if @hackathon.users.include? current_user %>
-    <% if @hackathon.teams == [] %>
-      <h3>You're currently signed up for this hackathon and you'll be assigned a team soon.<h3>
-      Don't want to participate in this hackathon anymore?
-      <%= form_tag(users_remove_hackathon_path, method: "post") do %>
-        <%= hidden_field_tag :hackathon_id, @hackathon.id %>
-        <%= submit_tag "Remove Myself from Hackathon", class: "btn btn-primary"%>
+    <div class="col-md-6" id="teams">
+      <% if @hackathon.users.include? current_user %>
+        <% if @hackathon.teams == [] %>
+          <h3>You're currently signed up for this hackathon and will be assigned a team soon.<h3>
+          <h4>Don't want to participate in this hackathon anymore?</h4>
+          <%= form_tag(users_remove_hackathon_path, method: "post") do %>
+            <%= hidden_field_tag :hackathon_id, @hackathon.id %>
+            <%= submit_tag "Remove Myself from Hackathon", class: "btn btn-danger"%>
+          <% end %>
+        <% else %>
+          <% session[:hackathon_id] = @hackathon.id %>
+          <h3>You've been assigned to a team!</h3>
+          <%= button_to "See the Teams", hackathon_teams_path(session[:hackathon_id]), class: "btn btn-primary"%>
+        <% end %>
+      <% else %>
+        <h3>You're not currently signed up for this hackathon. Want to participate?</h3>
+        <%= form_tag(users_add_hackathon_path, method: "post") do %>
+          <%= hidden_field_tag :hackathon_id, @hackathon.id %>
+          <%= submit_tag "Sign Up for Hackathon", class: "btn btn-primary"%>
+        <% end %>
       <% end %>
-    <% else %>
-      You've been assigned to a team!
-      <%= button_to "See the Teams", hackathon_teams_path(@hackathon.id), class: "btn btn-primary"%>
-    <% end %>
-  <% else %>
-    <h3>You're not currently signed up for this hackathon. Want to participate?</h3>
-    <%= form_tag(users_add_hackathon_path, method: "post") do %>
-      <%= hidden_field_tag :hackathon_id, @hackathon.id %>
-      <%= submit_tag "Sign Up for Hackathon", class: "btn btn-primary"%>
-    <% end %>
-  <% end %>
-</div>
+    </div>
+  </div>
+
+  <h2>Hackathon Location</h2>
+    <div style='width: 800px;'>
+      <div id="map" style='width: 800px; height: 400px;'></div>
+    </div>
+    <script type="text/javascript">
+    handler = Gmaps.build('Google');
+    handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
+      markers = handler.addMarkers(<%=raw @hash.to_json %>);
+      debugger;
+      handler.bounds.extendWith(markers);
+      handler.fitMapToBounds();
+    });
+  </script>
 
 <% end %>
