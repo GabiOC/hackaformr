@@ -12,5 +12,4 @@ class User < ActiveRecord::Base
   has_many :teams, through: :user_teams
   has_many :skills, through: :user_skills
 
-  accepts_nested_attributes_for :skills, allow_destroy: true
 end

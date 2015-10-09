@@ -27,8 +27,8 @@ end
   end
 
   def destroy
-    deleted_hackathon = Hackathon.find_by_id(params[:id]).destroy
-    flash[:success] = "#{deleted_hackathon.name} has been deleted."
+    @hackathon = Hackathon.find_by_id(params[:id]).destroy
+    flash[:success] = "#{@hackathon.name} has been deleted."
     redirect_to hackathons_path
   end
 
@@ -36,4 +36,19 @@ end
     @hackathon = Hackathon.find_by_id(params[:id])
   end
 
+  def update
+     @hackathon = Hackathon.find(params[:id])
+     if @hackathon.update_attributes(hackathon_params)
+       flash[:success] = "#{@hackathon.name} has been updated!"
+       redirect_to hackathons_path
+     else
+       render 'edit'
+     end
+   end
+
+  private
+
+  def hackathon_params
+    params.require(:hackathon).permit(:name, :start_date, :end_date, :location, :max_team_size, :description)
+  end
 end

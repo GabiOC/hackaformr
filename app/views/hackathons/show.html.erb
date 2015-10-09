@@ -2,6 +2,7 @@
 <script src='//google-maps-utility-library-v3.googlecode.com/svn/tags/markerclustererplus/2.0.14/src/markerclusterer_packed.js' type='text/javascript'></script>
 
 <% if current_admin %>
+
   <div class="col-md-4">
     <h1><u>Hackathon</u></h1>
     <h3><%= @hackathon.name %></h3>
@@ -12,14 +13,42 @@
     <li>Description: <%= @hackathon.description %></li><br>
   </div>
 
-  <div class="col-md-4">
-    <h2>Current Participants</h2>
-    <% @hackathon.users.each do |user| %>
-      Email: <%= user.email %><br>
-      Skills: <% user.skills.each do |skill| %>
-        <%= skill.name %>
-      <% end %><br>
+  <div class="container-fluid">
+    <div class="col-md-6" id="details">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">Hackathon Details</h3>
+        </div>
+        <div class="panel-body">
+         <div class="row">
+             <div class="col-md-6"><b>Name:</b> <%= @hackathon.name %></div>
+             <div class="col-md-6"><b>Max Team Size:</b> <%= @hackathon.max_team_size %></div>
+         </div>
+         <div class="row">
+           <div class="col-md-6"><b>Start Date:</b> <%= @hackathon.start_date %></div>
+           <div class="col-md-6"><b>Location:</b> <%= @hackathon.location %></div>
+         </div>
+         <div class="row">
+           <div class="col-md-6"><b>End Date:</b> <%= @hackathon.end_date %></div>
+           <div class="col-md-6"><b>Description:</b> <%= @hackathon.description %></div>
+         </div>
+       </div>
+      </div>
+    </div>
+
+    <div class="col-md-6" id="create-teams">
+    <% if @hackathon.teams == [] %>
+      <h2>Ready to create teams?</h2>
+      Participants will be emailed when teams are created.
+      <%= form_tag(teams_create_path, method: "post") do %>
+        <%= hidden_field_tag :hackathon_id, @hackathon.id %>
+        <%= submit_tag "Create Teams", class: "btn-lg btn-primary", id: "create-teams-button"%>
+      <% end %>
+    <% else %>
+      <h2> You've created teams! </h2>
+      <%= button_to "See the Teams", hackathon_teams_path(@hackathon.id), class: "btn-lg btn-primary" %>
     <% end %>
+    </div>
   </div>
 
 <div style='width: 800px;'>
@@ -45,6 +74,25 @@ handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
     <h2> You've created teams! </h2>
     <%= button_to "See the Teams", hackathon_teams_path(@hackathon.id), class: "btn btn-primary" %>
   <% end %>
+
+  <div id="participants-table">
+    <h2>Current Participants: <%= @hackathon.users.count %></h2>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th><h3> Name </h3></th>
+          <th><h3> Email </h3></th>
+          <th><h3> Skills </h3></th>
+        </tr>
+      </thead>
+      <% @hackathon.users.each do |user| %>
+        <tr>
+        <td><h4><%= user.name %></h4></td>
+        <td><h4><%= user.email %></h4></td>
+        <td><h4><%= user.skills.map {|skill| skill.name }.join(", ") %></h4></td>
+        </tr>
+      <% end %>
+    </table>
   </div>
 
 <% elsif current_user %>
