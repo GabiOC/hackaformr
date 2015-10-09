@@ -19,5 +19,10 @@
       </tbody>
     <%end%>
     </table>
+    <a href="mailto:
+    <% @hackathon.users.each do |u|%>
+      <%=u.email%>,
+      <% end %>
+      ">Email Your Group</a>
   </div>
 <%end%>

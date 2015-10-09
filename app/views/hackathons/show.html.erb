@@ -55,6 +55,11 @@
         </tr>
       <% end %>
     </table>
+    <a href="mailto:
+    <% @hackathon.users.each do |u|%>
+      <%=u.email%>,
+      <% end %>
+      ">Email The Participants</a>
   </div>
 
 <% elsif current_user %>
@@ -91,6 +96,7 @@
       <%= submit_tag "Sign Up for Hackathon", class: "btn btn-primary"%>
     <% end %>
   <% end %>
+  <a href="mailto:<%= @hackathon.admin.email %>">Email The Organizer</a>
 </div>
 
 <% end %>
