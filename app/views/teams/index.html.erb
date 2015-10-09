@@ -29,8 +29,12 @@
       <% end %>
     <% end %>
     </table>
+    <div class= "email">
     <a href=
-    "mailto:<%= teams.users.map {|user| user.email}.join(",")%>">
+    "mailto:<%= teams.users.map {|user| user.email}.join(",")%>" class="btn btn-default">
     Email Your Group</a>
   </div>
+    </div>
+
+
 <% end %>
