@@ -11,10 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151007165521) do
-
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
+ActiveRecord::Schema.define(version: 20151008193728) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -31,8 +28,8 @@ ActiveRecord::Schema.define(version: 20151007165521) do
     t.boolean  "organizer"
   end
 
-  add_index "admins", ["email"], name: "index_admins_on_email", unique: true, using: :btree
-  add_index "admins", ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true, using: :btree
+  add_index "admins", ["email"], name: "index_admins_on_email", unique: true
+  add_index "admins", ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
 
   create_table "hackathons", force: :cascade do |t|
     t.string   "name"
@@ -44,10 +41,19 @@ ActiveRecord::Schema.define(version: 20151007165521) do
     t.date     "end_date"
     t.text     "description"
     t.string   "location"
+    t.float    "latitude"
+    t.float    "longitude"
   end
 
-  add_index "hackathons", ["admin_id"], name: "index_hackathons_on_admin_id", using: :btree
   add_index "hackathons", ["admin_id"], name: "index_hackathons_on_admin_id"
+
+  create_table "participant_skills", force: :cascade do |t|
+    t.integer "participant_id"
+    t.integer "skills_id"
+  end
+
+  add_index "participant_skills", ["participant_id"], name: "index_participant_skills_on_participant_id"
+  add_index "participant_skills", ["skills_id"], name: "index_participant_skills_on_skills_id"
 
   create_table "skills", force: :cascade do |t|
     t.string   "name"
@@ -62,31 +68,31 @@ ActiveRecord::Schema.define(version: 20151007165521) do
     t.integer  "hackathon_id"
   end
 
-  add_index "teams", ["hackathon_id"], name: "index_teams_on_hackathon_id", using: :btree
+  add_index "teams", ["hackathon_id"], name: "index_teams_on_hackathon_id"
 
   create_table "user_hackathons", force: :cascade do |t|
     t.integer "user_id"
     t.integer "hackathon_id"
   end
 
-  add_index "user_hackathons", ["hackathon_id"], name: "index_user_hackathons_on_hackathon_id", using: :btree
-  add_index "user_hackathons", ["user_id"], name: "index_user_hackathons_on_user_id", using: :btree
+  add_index "user_hackathons", ["hackathon_id"], name: "index_user_hackathons_on_hackathon_id"
+  add_index "user_hackathons", ["user_id"], name: "index_user_hackathons_on_user_id"
 
   create_table "user_skills", force: :cascade do |t|
     t.integer "user_id"
     t.integer "skill_id"
   end
 
-  add_index "user_skills", ["skill_id"], name: "index_user_skills_on_skill_id", using: :btree
-  add_index "user_skills", ["user_id"], name: "index_user_skills_on_user_id", using: :btree
+  add_index "user_skills", ["skill_id"], name: "index_user_skills_on_skill_id"
+  add_index "user_skills", ["user_id"], name: "index_user_skills_on_user_id"
 
   create_table "user_teams", force: :cascade do |t|
     t.integer "user_id"
     t.integer "team_id"
   end
 
-  add_index "user_teams", ["team_id"], name: "index_user_teams_on_team_id", using: :btree
-  add_index "user_teams", ["user_id"], name: "index_user_teams_on_user_id", using: :btree
+  add_index "user_teams", ["team_id"], name: "index_user_teams_on_team_id"
+  add_index "user_teams", ["user_id"], name: "index_user_teams_on_user_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "name"
@@ -104,5 +110,4 @@ ActiveRecord::Schema.define(version: 20151007165521) do
     t.datetime "updated_at"
   end
 
-  add_foreign_key "teams", "hackathons"
 end
