@@ -4,7 +4,9 @@ class HackathonsController < ApplicationController
   end
 
   def create
-    @hackathon = Hackathon.create(name: params["name"], start_date: params["start_date"], end_date: params["end_date"], description: params["description"], max_team_size: params["max_team_size"], location: params["location"])
+    latitude = Geocoder.coordinates(params["location"]).first
+    longitude = Geocoder.coordinates(params["location"]).last
+    @hackathon = Hackathon.create(name: params["name"], start_date: params["start_date"], end_date: params["end_date"], description: params["description"], max_team_size: params["max_team_size"], location: params["location"], latitude: latitude, longitude: longitude)
     current_admin.hackathons << @hackathon
     redirect_to hackathons_path
   end
@@ -14,6 +16,7 @@ class HackathonsController < ApplicationController
     @hash = Gmaps4rails.build_markers(@hackathon) do |hackathon, marker|
       marker.lat hackathon.latitude
       marker.lng hackathon.longitude
+      binding.pry
     end
 end
 

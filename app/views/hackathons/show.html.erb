@@ -3,16 +3,6 @@
 
 <% if current_admin %>
 
-  <div class="col-md-4">
-    <h1><u>Hackathon</u></h1>
-    <h3><%= @hackathon.name %></h3>
-    <li>Start Date: <%= @hackathon.start_date %></li>
-    <li>End Date: <%= @hackathon.end_date %></li>
-    <li>Location: <%= @hackathon.location %></li>
-    <li>Organizer: <%= @hackathon.admin.email %></li>
-    <li>Description: <%= @hackathon.description %></li><br>
-  </div>
-
   <div class="container-fluid">
     <div class="col-md-6" id="details">
       <div class="panel panel-default">
@@ -51,30 +41,6 @@
     </div>
   </div>
 
-<div style='width: 800px;'>
-  <div id="map" style='width: 800px; height: 400px;'></div>
-</div>
-<script type="text/javascript">
-handler = Gmaps.build('Google');
-handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
-  markers = handler.addMarkers(<%=raw @hash.to_json %>);
-  handler.bounds.extendWith(markers);
-  handler.fitMapToBounds();
-});
-</script>
-
-  <div class="col-md-4">
-  <% if @hackathon.teams == [] %>
-    <h2>Ready to create teams?</h2>
-    <%= form_tag(teams_create_path, method: "post") do %>
-      <%= hidden_field_tag :hackathon_id, @hackathon.id %>
-      <%= submit_tag "Create Team", class: "btn btn-primary"%>
-    <% end %>
-  <% else %>
-    <h2> You've created teams! </h2>
-    <%= button_to "See the Teams", hackathon_teams_path(@hackathon.id), class: "btn btn-primary" %>
-  <% end %>
-
   <div id="participants-table">
     <h2>Current Participants: <%= @hackathon.users.count %></h2>
     <table class="table table-striped">
@@ -97,17 +63,30 @@ handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
 
 <% elsif current_user %>
 
-<div class="col-md-4">
-  <h1><u>Hackathon</u></h1>
-  <h3><%= @hackathon.name %></h3>
-  <ul>
-    <li>Start Date: <%= @hackathon.start_date %></li>
-    <li>End Date: <%= @hackathon.end_date %></li>
-    <li>Location: <%= @hackathon.location %></li>
-    <li>Organizer: <%= @hackathon.admin.email %></li>
-    <li>Description: <%= @hackathon.description %></li>
-  </ul>
-</div>
+  <div class="col-md-4">
+    <h1><u>Hackathon</u></h1>
+    <h3><%= @hackathon.name %></h3>
+    <ul>
+      <li>Start Date: <%= @hackathon.start_date %></li>
+      <li>End Date: <%= @hackathon.end_date %></li>
+      <li>Location: <%= @hackathon.location %></li>
+      <li>Organizer: <%= @hackathon.admin.email %></li>
+      <li>Description: <%= @hackathon.description %></li>
+    </ul>
+  </div>
+
+  <div style='width: 800px;'>
+    <div id="map" style='width: 800px; height: 400px;'></div>
+  </div>
+  <script type="text/javascript">
+  handler = Gmaps.build('Google');
+  handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
+    markers = handler.addMarkers(<%=raw @hash.to_json %>);
+    debugger;
+    handler.bounds.extendWith(markers);
+    handler.fitMapToBounds();
+  });
+  </script>
 
 <div class="col-md-4">
   <% if @hackathon.users.include? current_user %>
