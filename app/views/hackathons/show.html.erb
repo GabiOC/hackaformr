@@ -36,7 +36,8 @@
       <% end %>
     <% else %>
       <h2> You've created teams! </h2>
-      <%= button_to "See the Teams", hackathon_teams_path(@hackathon.id), class: "btn-lg btn-primary" %>
+      <% session[:hackathon_id] = @hackathon.id %>
+      <%= button_to "See the Teams", hackathon_teams_path(@hackathon.id), method: 'get', class: "btn-lg btn-primary" %>
     <% end %>
     </div>
   </div>
