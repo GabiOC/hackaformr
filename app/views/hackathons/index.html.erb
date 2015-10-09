@@ -50,12 +50,13 @@
         </tr>
       </thead>
       <% current_user.hackathons.each do |hackathon| %>
+        <% session[:hackathon_id] = hackathon.id %>
       <tr>
         <td><h4><%= link_to hackathon.name, :action => :show, :id => hackathon.id %></h4></td>
         <td><h4><%= hackathon.start_date %></h4></td>
         <td><h4><%= hackathon.end_date %></h4></td>
         <td><h4><%= hackathon.users.count %></h4></td>
-        <td><h4><%= hackathon.teams == [] ? "No" : (link_to "Yes", hackathon_teams_path(hackathon.id) ) %>
+        <td><h4><%= hackathon.teams == [] ? "No" : (link_to "Yes", hackathon_teams_path(session[:hackathon_id]) ) %>
         <td><a class="btn btn-default" src= <%= link_to "View", hackathon_path(hackathon) %></a>
       </tr>
       <% end %>
