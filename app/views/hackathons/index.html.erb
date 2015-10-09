@@ -1,4 +1,3 @@
-<!-- View for hackathon admin -->
 <% if current_admin %>
   <div id="hackathon-table">
     <h1>hackathons</h1>
@@ -50,13 +49,12 @@
         </tr>
       </thead>
       <% current_user.hackathons.each do |hackathon| %>
-        <% session[:hackathon_id] = hackathon.id %>
       <tr>
         <td><h4><%= link_to hackathon.name, :action => :show, :id => hackathon.id %></h4></td>
         <td><h4><%= hackathon.start_date %></h4></td>
         <td><h4><%= hackathon.end_date %></h4></td>
         <td><h4><%= hackathon.users.count %></h4></td>
-        <td><h4><%= hackathon.teams == [] ? "No" : (link_to "Yes", hackathon_teams_path(session[:hackathon_id]) ) %>
+        <td><h4><%= hackathon.teams == [] ? "No" : (link_to "Yes", hackathon_teams_path(hackathon.id) ) %>
         <td><a class="btn btn-default" src= <%= link_to "View", hackathon_path(hackathon) %></a>
       </tr>
       <% end %>
@@ -66,10 +64,10 @@
   <div class="col-md-4" id="upcoming">
     <div class="panel panel-default">
       <div class="panel-heading">
-        <h3 class="panel-title">Sign Up for a Hackathon</h3>
+        <h3 class="panel-title">All Upcoming Hackathons</h3>
       </div>
       <div class="panel-body">
-        <% Hackathon.all.order(start_date: :asc).each do |hackathon| %>
+        <% Hackathon.all.order(start_date: :asc).each_with_index do |hackathon, index| %>
           <% if hackathon.start_date > Date.current && hackathon.teams == [] %>
             <div class="row">
               <div class="col-md-6"><%= link_to(hackathon.name, hackathon_path(hackathon)) %></div>
