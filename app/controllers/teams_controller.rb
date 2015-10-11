@@ -14,7 +14,7 @@ class TeamsController < ApplicationController
       @hackathon.teams << team_object
       user_array.each do |u|
         u.teams << team_object
-        UserNotifier.send_signup_email(u).deliver
+        # UserNotifier.send_signup_email(u).deliver
       end
     end
     session[:hackathon_id] = @hackathon.id
