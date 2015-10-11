@@ -42,6 +42,7 @@ class Team < ActiveRecord::Base
     # iterate through users in skill
     # iterate through teams
     # if user hasn't been assigned yet, add to team
+    # break out of loop as this user can't be assigned again
     # next user starts with next team in array. so reorder team_array so next team is first team
 
     @skills_hash.each do |skill, users|
@@ -51,6 +52,7 @@ class Team < ActiveRecord::Base
           if user_not_assigned && team.length < @max_team_members
             team << user
             @team_array.rotate!
+            break
           end
         end
       end
