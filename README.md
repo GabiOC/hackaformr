@@ -2,38 +2,15 @@
 
 ## Description
 
-Add a short description of your app.
-
-## Screenshots
-
-Add some spiffy screenshots of your app here.
-
-## Background
-
-Why did you want to make this app? What was your development process
-like?
-
-## Features
-
-Bullet point some of the key features of your app here.
+Web app that facilitates hackathon organization, team formation and communication
 
 ## Usage
 
-How do users use your app?
-
-## Development/Contribution
-
-Explain how people can contribute to your app. How should they write tests?
-Any things in particular you'd like to see in pull requests?
-
-## Future
-
-What features are you currently working on? Only mention things that you
-actually are implementing. No pie-in-the-sky-never-gonna-happen stuff.
+Hackathon organizers can sign up and create hackathons. When you want participants to sign up, send them the link to the hackathon's page. To form teams from the participants who have signed up, simply click the 'Create Teams' button and participants will be emailed with their team details.
 
 ## Author
 
-Link to your blog, twitter, etc!
+Hackaformr was made with love at Flatiron School by [Stacey Ko](https://github.com/staceyko), [Emily Kowal](https://github.com/emottk) and [Gabi O'Connor](https://github.com/GabiOC).
 
 ## License
 
